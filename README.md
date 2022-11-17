@@ -6,9 +6,11 @@
 
   - 🔳 protect routes (except create)
   - 🔳 admin routes (except update)
-  - 🔳 validate CREATE
-    - 🔳 body (middleware)
-    - 🔳 existing username (controller)
-  - 🔳 validate UPDATE
-    - 🔳 id (middleware, general)
-    - 🔳 body (middleware)
+  - 🔳 ❗❗❗ update password (bcrypt, etc...)
+  - ✅ validate CREATE
+    - ✅ body (middleware)
+    - ✅ existing username (controller)
+  - ✅ validate UPDATE
+    - ✅ body (middleware)
+    - ✅ existing username (controller)
+    - ✅ id (middleware, general)
