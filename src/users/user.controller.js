@@ -44,3 +44,19 @@ export const updateUser = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
+// 📌 REMOVE
+
+export const removeUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const userExists = await service.findById(id);
+    if (!userExists) return res.status(404).send({ message: 'NOT FOUND' });
+
+    const user = await service.remove(id);
+    res.send(user);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
