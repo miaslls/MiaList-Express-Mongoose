@@ -6,8 +6,7 @@ export const createUser = async (req, res) => {
   try {
     const body = req.body;
 
-    const userByUsername = await service.findByUsername(body.username);
-    console.log(userByUsername); // 🐞
+    const userByUsername = await service.findByUsername(body.username.toLowecase());
     if (userByUsername) return res.status(400).send({ message: 'USERNAME TAKEN' });
 
     const user = await service.create(body);
@@ -42,7 +41,7 @@ export const updateUser = async (req, res) => {
     if (!userById) return res.status(404).send({ message: 'NOT FOUND' });
 
     if (body.username) {
-      const userByUsername = await service.findByUsername(body.username);
+      const userByUsername = await service.findByUsername(body.username.toLowecase());
       if (userByUsername) return res.status(400).send({ message: 'USERNAME TAKEN' });
     }
 
