@@ -22,12 +22,24 @@ export const createUser = async (req, res) => {
 export const findAllUsers = async (req, res) => {
   try {
     const users = await service.findAll();
-
-    if (!users) {
-      return res.status(404).send({ message: 'NOT FOUND' });
-    }
-
     res.send(users);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// 📌 UPDATE
+
+export const updateUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const body = req.body;
+
+    const userExists = await service.findById(id);
+    if (!userExists) return res.status(404).send({ message: 'NOT FOUND' });
+
+    const user = await service.update(id, body);
+    res.send(user);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
