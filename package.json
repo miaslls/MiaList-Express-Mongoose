@@ -1,5 +1,5 @@
 {
-  "name": "mialist-api",
+  "name": "mialist-express-mongoose",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
