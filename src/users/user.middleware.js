@@ -9,10 +9,9 @@ export const validateBody_post = (req, res, next) => {
 
 export const validateBody_patch = (req, res, next) => {
   const body = req.body;
-
-  if (body?.password.length < 8) return res.status(400).send({ message: 'PASSWORD INVALID' });
-
-  // TODO: validate auth type
+  if ('password' in body) {
+    if (body.password.length < 8) return res.status(400).send({ message: 'PASSWORD INVALID' });
+  }
 
   next();
 };
