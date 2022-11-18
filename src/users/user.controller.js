@@ -1,3 +1,5 @@
+import bcrypt from 'bcryptjs';
+
 import * as service from './user.service.js';
 
 // 📌 POST
@@ -43,6 +45,10 @@ export const updateUser = async (req, res) => {
     if (body.username) {
       const userByUsername = await service.findByUsername(body.username);
       if (userByUsername) return res.status(400).send({ message: 'USERNAME TAKEN' });
+    }
+
+    if (body.password) {
+      body.password = await bcrypt.hash(body.password, 10);
     }
 
     const user = await service.update(id, body);
