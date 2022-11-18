@@ -8,7 +8,9 @@ export const createCategory = async (req, res) => {
     const reqBody = req.body;
 
     // TODO: validate reqBody (middleware)
-    // TODO: validate unique categ name
+
+    const categByName = await service.findByName(reqBody.name);
+    if (categByName) return res.status(400).send({ message: 'CATEGORY NOT UNIQUE' });
 
     const body = { ...reqBody, user: loggedUser._id };
     const category = await service.create(body);
@@ -31,3 +33,31 @@ export const findAllCategoriesByUser = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
+// 📌 PATCH
+
+export const updateCategory = async (req, res) => {
+  try {
+    const loggedUser = req.user;
+    const categId = req.params.id;
+    const body = req.body;
+
+    const categToUpdate = await service.findById(categId);
+    const categUserId = categToUpdate.user.toString();
+    if (categUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
+
+    const categByName = await service.findByName(body.name);
+
+    if (categByName) {
+      if (categByName.name !== body.name) return res.status(400).send({ message: 'CATEGORY NOT UNIQUE' });
+    }
+
+    const category = await service.update(categId, body);
+
+    res.send(category);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// 📌 DELETE
