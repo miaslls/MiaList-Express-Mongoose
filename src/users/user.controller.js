@@ -32,7 +32,7 @@ export const findAllUsers = async (req, res) => {
   }
 };
 
-// 📌 UPDATE
+// 📌 PATCH
 
 export const updateUser = async (req, res) => {
   try {
@@ -58,7 +58,7 @@ export const updateUser = async (req, res) => {
   }
 };
 
-// 📌 REMOVE
+// 📌 DELETE
 
 export const removeUser = async (req, res) => {
   try {
