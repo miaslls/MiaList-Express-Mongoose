@@ -4,8 +4,8 @@
 
 - ### **USER**
 
-  - 🔳 protect routes (except create)
-  - 🔳 admin routes (except update)
+  - ✅ protect routes (except create)
+  - ✅ admin routes (except update !== isAdmin)
   - ✅ ❗ update password (bcrypt, etc...)
   - ✅ validate CREATE
     - ✅ body (middleware)
