@@ -10,4 +10,4 @@ export const findByName = (name) => Category.findOne({ name: name });
 
 export const update = (id, body) => Category.findByIdAndUpdate(id, body).setOptions({ returnOriginal: false });
 
-export const remove = (id) => Category.findByIdAndRemove(id).select('-password');
+export const remove = (id) => Category.findByIdAndRemove(id);
