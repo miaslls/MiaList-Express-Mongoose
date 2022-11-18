@@ -7,6 +7,7 @@ const EntrySchema = new mongoose.Schema(
     starred: { type: Boolean },
     completed: { type: Boolean },
     createdAt: { type: Date, required: true, default: new Date() },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   },
   { versionKey: false },
 );
