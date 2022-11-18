@@ -7,8 +7,6 @@ export const createCategory = async (req, res) => {
     const loggedUser = req.user;
     const reqBody = req.body;
 
-    // TODO: validate reqBody (middleware)
-
     const categByName = await service.findByName(reqBody.name);
     if (categByName) return res.status(400).send({ message: 'CATEGORY NOT UNIQUE' });
 

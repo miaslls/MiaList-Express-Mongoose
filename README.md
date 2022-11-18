@@ -4,11 +4,11 @@
 
 - ## **CATEGORY**
 
-  - 🔳 validate CREATE
-    - 🔳 body (middleware)
+  - ✅ validate CREATE
+    - ✅ body (middleware)
     - ✅ existing username (controller)
-  - 🔳 validate UPDATE
-    - 🔳 body (middleware)
+  - ✅ validate UPDATE
+    - ✅ body (middleware)
     - ✅ existing category name (controller)
     - ✅ id (middleware, general)
 
