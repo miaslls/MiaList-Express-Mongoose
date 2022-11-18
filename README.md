@@ -6,11 +6,11 @@
 
   - 🔳 validate CREATE
     - 🔳 body (middleware)
-    - 🔳 existing username (controller)
+    - ✅ existing username (controller)
   - 🔳 validate UPDATE
     - 🔳 body (middleware)
-    - 🔳 existing category name (controller)
-    - 🔳 id (middleware, general)
+    - ✅ existing category name (controller)
+    - ✅ id (middleware, general)
 
 - ### **USER**
 
