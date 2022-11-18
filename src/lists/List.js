@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 const ListSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true, unique: true },
-    icon: { type: String, required: true, unique: true },
+    title: { type: String, required: true },
+    icon: { type: String, required: true },
     pinned: { type: Boolean },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
