@@ -43,6 +43,8 @@ export const updateCategory = async (req, res) => {
     const body = req.body;
 
     const categToUpdate = await service.findById(categId);
+    if (!categToUpdate) return res.status(404).send({ message: 'NOT FOUND' });
+
     const categUserId = categToUpdate.user.toString();
     if (categUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
 
@@ -61,3 +63,24 @@ export const updateCategory = async (req, res) => {
 };
 
 // 📌 DELETE
+
+export const removeCategory = async (req, res) => {
+  try {
+    const loggedUser = req.user;
+    const categId = req.params.id;
+
+    const categToRemove = await service.findById(categId);
+    if (!categToRemove) return res.status(404).send({ message: 'NOT FOUND' });
+
+    const categUserId = categToRemove.user.toString();
+    if (categUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
+
+    if (categToRemove.lists.length > 0) return res.status(405).send({ message: 'CATEGORY NON-EMPTY' });
+
+    const category = await service.remove(categId);
+
+    res.send(category);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};

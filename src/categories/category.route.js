@@ -8,5 +8,6 @@ import validate_id from '../middleware/validate_id.js';
 router.post('/', controller.createCategory);
 router.get('/', controller.findAllCategoriesByUser);
 router.patch('/:id', validate_id, controller.updateCategory);
+router.delete('/:id', controller.removeCategory);
 
 export default router;
