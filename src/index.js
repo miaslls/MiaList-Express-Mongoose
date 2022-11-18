@@ -4,6 +4,7 @@ import 'dotenv/config';
 
 import databaseConnection from './database/dbConnection.js';
 
+import authRoute from './auth/auth.route.js';
 import userRoute from './users/user.route.js';
 
 const app = express();
@@ -14,6 +15,7 @@ databaseConnection();
 app.use(cors());
 app.use(express.json());
 
+app.use('/login', authRoute);
 app.use('/user', userRoute);
 
 app.listen(port, () => {
