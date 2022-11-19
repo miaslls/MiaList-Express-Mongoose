@@ -2,7 +2,8 @@ import List from './List.js';
 
 export const create = (body) => List.create(body);
 
-export const findAllByUser = (userId) => List.find({ user: userId }).populate('user').sort({ createdAt: 'desc' });
+export const findAllByUser = (userId) =>
+  List.find({ user: userId }).populate('user').populate('category').sort({ createdAt: 'desc' });
 
 export const findById = (id) => List.findById(id);
 

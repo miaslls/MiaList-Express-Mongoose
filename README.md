@@ -4,7 +4,7 @@
 
 - ## **LIST**
 
-- 🔳 add list to category on POST
+- ✅ add list to category on POST
 
 - 🔳 add/remove list from category on PATCH
 

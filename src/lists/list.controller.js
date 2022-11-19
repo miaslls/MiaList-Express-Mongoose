@@ -1,4 +1,5 @@
 import * as service from './list.service.js';
+import * as categService from '../categories/category.service.js';
 
 // 📌 POST
 
@@ -10,10 +11,23 @@ export const createList = async (req, res) => {
     const listByTitle = await service.findByTitle(reqBody.title, loggedUser._id);
     if (listByTitle) return res.status(400).send({ message: 'LIST NOT UNIQUE' });
 
-    // TODO: add to category
-
     const body = { ...reqBody, user: loggedUser._id };
     const list = await service.create(body);
+
+    // findCategById -> categ exists ✔ -> categ belongs to loggedUser ✔ -> add list to categ.lists ✔
+
+    const categToUpdate = await categService.findById(reqBody.category);
+    if (!categToUpdate) return res.status(404).send({ message: 'CATEGORY NOT FOUND' });
+
+    const categUserId = categToUpdate.user.toString();
+    if (categUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
+
+    if (!categToUpdate.lists.includes(list._id)) {
+      categToUpdate.lists.push(list._id);
+    }
+
+    const categBody = { lists: categToUpdate.lists };
+    await categService.update(categToUpdate._id, categBody);
 
     res.send(list);
   } catch (err) {
