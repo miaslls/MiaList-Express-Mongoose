@@ -1,6 +1,6 @@
 import * as service from './category.service.js';
 
-// 📌 CREATE
+// 📌 POST
 
 export const createCategory = async (req, res) => {
   try {
