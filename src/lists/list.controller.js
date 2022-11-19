@@ -51,7 +51,7 @@ export const updateList = async (req, res) => {
     const listByTitle = await service.findByTitle(body.title, loggedUser._id);
 
     if (listByTitle) {
-      if (listToUpdate.title !== body.title) return res.status(400).send({ message: 'CATEGORY NOT UNIQUE' });
+      if (listToUpdate.title !== body.title) return res.status(400).send({ message: 'LIST NOT UNIQUE' });
     }
 
     // TODO: if ('category' in body) add/remove from category
