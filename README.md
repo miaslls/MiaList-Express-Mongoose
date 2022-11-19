@@ -10,22 +10,22 @@
 
 - 🔳 remove list from category on DELETE
 
-- 🔳 validate CREATE
+- ✅ validate CREATE
 
-  - 🔳 body (middleware)
-  - 🔳 existing username (controller)
+  - ✅ body (middleware)
+  - ✅ existing list title (controller)
 
-- 🔳 validate UPDATE
+- ✅ validate UPDATE
 
-  - 🔳 body (middleware)
-  - 🔳 existing category name (controller)
-  - 🔳 id (middleware, general)
+  - ✅ body (middleware)
+  - ✅ existing ist title (controller)
+  - ✅ id (middleware, general)
 
 - ## **CATEGORY**
 
   - ✅ validate CREATE
     - ✅ body (middleware)
-    - ✅ existing username (controller)
+    - ✅ existing categ name (controller)
   - ✅ validate UPDATE
     - ✅ body (middleware)
     - ✅ existing category name (controller)
