@@ -49,7 +49,7 @@ export const updateCategory = async (req, res) => {
     const categByName = await service.findByName(body.name, loggedUser._id);
 
     if (categByName) {
-      if (categByName.name !== body.name) return res.status(400).send({ message: 'CATEGORY NOT UNIQUE' });
+      if (categToUpdate.name !== body.name) return res.status(400).send({ message: 'CATEGORY NOT UNIQUE' });
     }
 
     const category = await service.update(categId, body);
