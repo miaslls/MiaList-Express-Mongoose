@@ -7,7 +7,7 @@ export const createCategory = async (req, res) => {
     const loggedUser = req.user;
     const reqBody = req.body;
 
-    const categByName = await service.findByName(reqBody.name);
+    const categByName = await service.findByName(reqBody.name, loggedUser._id);
     if (categByName) return res.status(400).send({ message: 'CATEGORY NOT UNIQUE' });
 
     const body = { ...reqBody, user: loggedUser._id };
