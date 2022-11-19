@@ -50,16 +50,36 @@ export const updateList = async (req, res) => {
 
     const listByTitle = await service.findByTitle(body.title, loggedUser._id);
 
-    console.log(listByTitle?.title, body.title, listUserId, loggedUser._id); // 🐞
-
     if (listByTitle) {
-      console.log(listToUpdate.title !== body.title); // 🐞
       if (listToUpdate.title !== body.title) return res.status(400).send({ message: 'CATEGORY NOT UNIQUE' });
     }
 
     // TODO: if ('category' in body) add/remove from category
 
     const list = await service.update(listId, body);
+
+    res.send(list);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+// 📌 DELETE
+
+export const removeList = async (req, res) => {
+  try {
+    const loggedUser = req.user;
+    const listId = req.params.id;
+
+    const listToRemove = await service.findById(listId);
+    if (!listToRemove) return res.status(404).send({ message: 'NOT FOUND' });
+
+    const listUserId = listToRemove.user.toString();
+    if (listUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
+
+    // TODO: remove from category
+
+    const list = await service.remove(listId);
 
     res.send(list);
   } catch (err) {
