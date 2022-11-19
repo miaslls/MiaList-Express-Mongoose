@@ -2,11 +2,11 @@ import List from './List.js';
 
 export const create = (body) => List.create(body);
 
-export const findAllByUser = (userId) => List.find({ user: userId }).sort({ createdAt: 'desc' });
+export const findAllByUser = (userId) => List.find({ user: userId }).populate('user').sort({ createdAt: 'desc' });
 
 export const findById = (id) => List.findById(id);
 
-export const findByName = (title) => List.findOne({ title: title });
+export const findByTitle = (title, user) => List.findOne({ title: title, user: user });
 
 export const update = (id, body) => List.findByIdAndUpdate(id, body).setOptions({ returnOriginal: false });
 
