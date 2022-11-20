@@ -8,7 +8,7 @@ export const createCategory = async (req, res) => {
     const reqBody = req.body;
 
     const categByName = await service.findByName(reqBody.name, loggedUser._id);
-    if (categByName) return res.status(400).send({ message: 'CATEGORY NOT UNIQUE' });
+    if (categByName) return res.status(400).send({ message: 'DUPLICATE CATEGORY' });
 
     const body = { ...reqBody, user: loggedUser._id };
     const category = await service.create(body);
@@ -49,7 +49,7 @@ export const updateCategory = async (req, res) => {
     const categByName = await service.findByName(body.name, loggedUser._id);
 
     if (categByName) {
-      if (categToUpdate.name !== body.name) return res.status(400).send({ message: 'CATEGORY NOT UNIQUE' });
+      if (categToUpdate.name !== body.name) return res.status(400).send({ message: 'DUPLICATE CATEGORY' });
     }
 
     const category = await service.update(categId, body);

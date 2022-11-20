@@ -10,7 +10,7 @@ export const createList = async (req, res) => {
     const reqBody = req.body;
 
     const listByTitle = await service.findByTitle(reqBody.title, loggedUser._id);
-    if (listByTitle) return res.status(400).send({ message: 'LIST NOT UNIQUE' });
+    if (listByTitle) return res.status(400).send({ message: 'DUPLICATE LIST' });
 
     const body = { ...reqBody, user: loggedUser._id };
     const list = await service.create(body);
@@ -53,7 +53,7 @@ export const updateList = async (req, res) => {
     const listByTitle = await service.findByTitle(body.title, loggedUser._id);
 
     if (listByTitle) {
-      if (listToUpdate.title !== body.title) return res.status(400).send({ message: 'LIST NOT UNIQUE' });
+      if (listToUpdate.title !== body.title) return res.status(400).send({ message: 'DUPLICATE LIST' });
     }
 
     const list = await service.update(listId, body);
