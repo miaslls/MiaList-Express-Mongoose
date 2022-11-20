@@ -4,11 +4,9 @@
 
 - ## **ENTRY**
 
-- 🔳 add entry to list on POST
+- ✅ add entry to list on POST
 
-- 🔳 add/remove entry from list on PATCH
-
-- 🔳 remove entry from list on DELETE
+- ✅ remove entry from list on DELETE
 
 - ✅ validate CREATE
 
