@@ -8,6 +8,7 @@ import authRoute from './auth/auth.route.js';
 import userRoute from './users/user.route.js';
 import categRoute from './categories/category.route.js';
 import listRoute from './lists/list.route.js';
+import entryRoute from './entries/entry.route.js';
 
 import authorize from './middleware/authorize.js';
 
@@ -23,6 +24,7 @@ app.use('/login', authRoute);
 app.use('/user', userRoute);
 app.use('/category', authorize, categRoute);
 app.use('/list', authorize, listRoute);
+app.use('/entry', authorize, entryRoute);
 
 app.listen(port, () => {
   console.log(`server running @ port ${port}`);
