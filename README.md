@@ -2,6 +2,23 @@
 
 ## **TODO**:
 
+- ## **ENTRY**
+
+- 🔳 add entry to list on POST
+
+- 🔳 add/remove entry from list on PATCH
+
+- 🔳 remove entry from list on DELETE
+
+- 🔳 validate CREATE
+
+  - 🔳 body (middleware)
+
+- 🔳 validate UPDATE
+
+  - 🔳 body (middleware)
+  - ✅ id (middleware, general)
+
 - ## **LIST**
 
 - ✅ add list to category on POST
