@@ -59,3 +59,24 @@ export const updateEntry = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
+// 📌 DELETE
+
+export const removeEntry = async (req, res) => {
+  try {
+    const loggedUser = req.user;
+    const entryId = req.params.id;
+
+    const entryToRemove = await service.findById(entryId);
+    if (!entryToRemove) return res.status(404).send({ message: 'ENTRY NOT FOUND' });
+
+    const entryUserId = entryToRemove.user.toString();
+    if (entryUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
+
+    const entry = await service.remove(entryId);
+
+    res.send(entry);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
