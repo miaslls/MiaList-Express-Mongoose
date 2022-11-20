@@ -10,13 +10,13 @@
 
 - 🔳 remove entry from list on DELETE
 
-- 🔳 validate CREATE
+- ✅ validate CREATE
 
-  - 🔳 body (middleware)
+  - ✅ body (middleware)
 
-- 🔳 validate UPDATE
+- ✅ validate UPDATE
 
-  - 🔳 body (middleware)
+  - ✅ body (middleware)
   - ✅ id (middleware, general)
 
 - ## **LIST**
