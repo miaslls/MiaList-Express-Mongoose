@@ -1,5 +1,7 @@
 import * as service from './entry.service.js';
 
+import { addEntryToList, removeEntryFromList } from './util/manageLists.js';
+
 // 📌 POST
 
 export const createEntry = async (req, res) => {
@@ -12,6 +14,8 @@ export const createEntry = async (req, res) => {
 
     const body = { ...reqBody, user: loggedUser._id };
     const entry = await service.create(body);
+
+    addEntryToList(entry.list, entry._id);
 
     res.send(entry);
   } catch (err) {
@@ -74,6 +78,8 @@ export const removeEntry = async (req, res) => {
     if (entryUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
 
     const entry = await service.remove(entryId);
+
+    removeEntryFromList(entryToRemove.list.toString(), entryId);
 
     res.send(entry);
   } catch (err) {
