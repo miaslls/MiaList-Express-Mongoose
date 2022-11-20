@@ -6,9 +6,9 @@
 
 - ✅ add list to category on POST
 
-- 🔳 add/remove list from category on PATCH
+- ✅ add/remove list from category on PATCH
 
-- 🔳 remove list from category on DELETE
+- ✅ remove list from category on DELETE
 
 - ✅ validate CREATE
 
