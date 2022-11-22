@@ -37,6 +37,7 @@ const findAllTagsByUser = async (req, res) => {
 const updateTag = async (req, res) => {
   try {
     const loggedUser = req.user;
+    const profileId = req.params.profileId;
     const tagId = req.params.tagId;
     const body = req.body;
 
@@ -46,7 +47,7 @@ const updateTag = async (req, res) => {
     const tagUserId = tagToUpdate.user.toString();
     if (tagUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
 
-    const tagByName = await service.findByName(body.name, loggedUser._id);
+    const tagByName = await service.findByName(body.name, loggedUser._id, profileId);
 
     if (tagByName) {
       if (tagToUpdate.name !== body.name) return res.status(400).send({ message: 'DUPLICATE TAG' });

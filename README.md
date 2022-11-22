@@ -6,7 +6,6 @@
 
   - ✅ user
   - ✅ profile
-  - 🔳 tag
   - 🔳 list
   - 🔳 entry
 
@@ -14,7 +13,7 @@
 
   - ✅ user
   - ✅ profile \*
-  - 🔳 tag \*
+  - ✅ tag \*
   - 🔳 list \*
   - 🔳 entry \*
 
@@ -22,13 +21,13 @@
 
   - ✅ user
   - ✅ profile
-  - 🔳 tag \*
+  - ✅ tag \*
   - 🔳 list \*
   - 🔳 entry \*
 
 - 🔳 addTo/removeFromParent
 
   - ✅ profile
-  - 🔳 tag
+  - 🔳 tag \*\* ❗❗❗
   - 🔳 list
   - 🔳 entry

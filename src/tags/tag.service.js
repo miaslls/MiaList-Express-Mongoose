@@ -6,7 +6,7 @@ const findAllByUser = (userId) => Tag.find({ user: userId }).populate('user').so
 
 const findById = (id) => Tag.findById(id);
 
-const findByName = (name, user) => Tag.findOne({ name: name, user: user });
+const findByName = (name, user, profile) => Tag.findOne({ name: name, user: user, profile: profile });
 
 const update = (id, body) => Tag.findByIdAndUpdate(id, body).setOptions({ returnOriginal: false });
 
