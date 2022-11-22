@@ -1,8 +1,8 @@
-import * as service from './tag.service.js';
+const service = require('./tag.service');
 
 // 📌 POST
 
-export const createTag = async (req, res) => {
+const createTag = async (req, res) => {
   try {
     const loggedUser = req.user;
     const reqBody = req.body;
@@ -21,7 +21,7 @@ export const createTag = async (req, res) => {
 
 // 📌 GET (ALL) by user
 
-export const findAllTagsByUser = async (req, res) => {
+const findAllTagsByUser = async (req, res) => {
   try {
     const loggedUser = req.user;
     const tags = await service.findAllByUser(loggedUser._id);
@@ -34,7 +34,7 @@ export const findAllTagsByUser = async (req, res) => {
 
 // 📌 PATCH
 
-export const updateTag = async (req, res) => {
+const updateTag = async (req, res) => {
   try {
     const loggedUser = req.user;
     const tagId = req.params.id;
@@ -62,7 +62,7 @@ export const updateTag = async (req, res) => {
 
 // 📌 DELETE
 
-export const removeTag = async (req, res) => {
+const removeTag = async (req, res) => {
   try {
     const loggedUser = req.user;
     const tagId = req.params.id;
@@ -82,3 +82,5 @@ export const removeTag = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
+module.exports = { createTag, findAllTagsByUser, updateTag, removeTag };

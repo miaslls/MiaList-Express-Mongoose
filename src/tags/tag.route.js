@@ -1,14 +1,12 @@
-import express from 'express';
-const router = express.Router();
-
-import * as controller from './tag.controller.js';
+const tag = require('express').Router();
+const controller = require('./tag.controller');
 
 import validate_id from '../middleware/validate_id.js';
 import { validateBody } from './tag.middleware.js';
 
-router.post('/', validateBody, controller.createTag);
-router.get('/', controller.findAllTagsByUser);
-router.patch('/:id', validate_id, validateBody, controller.updateTag);
-router.delete('/:id', controller.removeTag);
+tag.post('/', validateBody, controller.createTag);
+tag.get('/', controller.findAllTagsByUser);
+tag.patch('/:id', validate_id, validateBody, controller.updateTag);
+tag.delete('/:id', controller.removeTag);
 
-export default router;
+module.exports = tag;

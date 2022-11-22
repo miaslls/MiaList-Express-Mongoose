@@ -1,6 +1,5 @@
-import bcrypt from 'bcryptjs';
-
-import { getUser, generateToken } from './auth.service.js';
+const bcrypt = require('bcryptjs');
+const { getUser, generateToken } = require('./auth.service');
 
 const login = async (req, res) => {
   try {
@@ -29,4 +28,4 @@ const login = async (req, res) => {
   }
 };
 
-export default login;
+module.exports = login;

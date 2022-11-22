@@ -1,10 +1,9 @@
-import * as service from './profile.service.js';
-
-import { addProfileToUser } from './util/manageUsers.js';
+const service = require('./profile.service');
+const { addProfileToUser } = require('./util/manageUsers');
 
 // 📌 POST
 
-export const createProfile = async (req, res) => {
+const createProfile = async (req, res) => {
   try {
     const loggedUser = req.user;
     const reqBody = req.body;
@@ -25,7 +24,7 @@ export const createProfile = async (req, res) => {
 
 // 📌 GET (ALL) by user
 
-export const findAllProfilesByUser = async (req, res) => {
+const findAllProfilesByUser = async (req, res) => {
   try {
     const loggedUser = req.user;
     const profiles = await service.findAllByUser(loggedUser._id);
@@ -35,3 +34,5 @@ export const findAllProfilesByUser = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
+module.exports = { createProfile, findAllProfilesByUser };

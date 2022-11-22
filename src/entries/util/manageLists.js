@@ -1,6 +1,6 @@
-import * as listService from '../../lists/list.service.js';
+const listService = require('../../lists/list.service');
 
-export const addEntryToList = async (list, entry) => {
+const addEntryToList = async (list, entry) => {
   const listToUpdate = await listService.findById(list);
   if (!listToUpdate) return res.status(404).send({ message: 'CATEGORY NOT FOUND' });
 
@@ -12,7 +12,7 @@ export const addEntryToList = async (list, entry) => {
   await listService.update(list, listBody);
 };
 
-export const removeEntryFromList = async (list, entry) => {
+const removeEntryFromList = async (list, entry) => {
   const listToUpdate = await listService.findById(list);
   if (!listToUpdate) return res.status(404).send({ message: 'CATEGORY NOT FOUND' });
 
@@ -26,3 +26,5 @@ export const removeEntryFromList = async (list, entry) => {
   const listBody = { entries: listToUpdate_EntryIds };
   await listService.update(list, listBody);
 };
+
+module.exports = { addEntryToList, removeEntryFromList };

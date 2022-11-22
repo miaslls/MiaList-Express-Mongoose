@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const UserSchema = new mongoose.Schema(
   {
@@ -8,8 +8,8 @@ const UserSchema = new mongoose.Schema(
     isAdmin: { type: Boolean, required: true, default: false },
     profiles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Profile' }],
     name: { type: String },
-    email: { type: String },
-    CPF: { type: Number },
+    email: { type: String, unique: true },
+    CPF: { type: Number, unique: true },
   },
   { versionKey: false },
 );
@@ -21,4 +21,4 @@ UserSchema.pre('save', async function (next) {
 
 const User = mongoose.model('User', UserSchema, 'users');
 
-export default User;
+module.exports = User;

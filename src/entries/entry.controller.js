@@ -1,10 +1,9 @@
-import * as service from './entry.service.js';
-
-import { addEntryToList, removeEntryFromList } from './util/manageLists.js';
+const service = require('./entry.service');
+const { addEntryToList, removeEntryFromList } = require('./util/manageLists');
 
 // 📌 POST
 
-export const createEntry = async (req, res) => {
+const createEntry = async (req, res) => {
   try {
     const loggedUser = req.user;
     const reqBody = req.body;
@@ -25,7 +24,7 @@ export const createEntry = async (req, res) => {
 
 // 📌 GET (ALL) by user
 
-export const findAllEntriesByUser = async (req, res) => {
+const findAllEntriesByUser = async (req, res) => {
   try {
     const loggedUser = req.user;
     const entries = await service.findAllByUser(loggedUser._id);
@@ -38,7 +37,7 @@ export const findAllEntriesByUser = async (req, res) => {
 
 // 📌 PATCH
 
-export const updateEntry = async (req, res) => {
+const updateEntry = async (req, res) => {
   try {
     const loggedUser = req.user;
     const entryId = req.params.id;
@@ -66,7 +65,7 @@ export const updateEntry = async (req, res) => {
 
 // 📌 DELETE
 
-export const removeEntry = async (req, res) => {
+const removeEntry = async (req, res) => {
   try {
     const loggedUser = req.user;
     const entryId = req.params.id;
@@ -86,3 +85,5 @@ export const removeEntry = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
+module.exports = { createEntry, findAllEntriesByUser, updateEntry, removeEntry };

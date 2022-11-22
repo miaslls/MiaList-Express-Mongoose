@@ -1,15 +1,13 @@
-import express from 'express';
-const router = express.Router();
+const user = require('express').Router();
+const controller = require('./user.controller');
 
-import * as controller from './user.controller.js';
+const authorize = require('../middleware/authorize');
+const validate_id = require('../middleware/validate_id');
+const middleware = require('./user.middleware');
 
-import authorize from '../middleware/authorize.js';
-import validate_id from '../middleware/validate_id.js';
-import * as middleware from './user.middleware.js';
+user.post('/', middleware.validateBody_post, controller.createUser);
+user.get('/', authorize, controller.findAllUsers);
+user.patch('/:id', authorize, validate_id, middleware.validateBody_patch, controller.updateUser);
+user.delete('/:id', authorize, validate_id, controller.removeUser);
 
-router.post('/', middleware.validateBody_post, controller.createUser);
-router.get('/', authorize, controller.findAllUsers);
-router.patch('/:id', authorize, validate_id, middleware.validateBody_patch, controller.updateUser);
-router.delete('/:id', authorize, validate_id, controller.removeUser);
-
-export default router;
+module.exports = user;

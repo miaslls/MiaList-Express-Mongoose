@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-export const validateBody_post = (req, res, next) => {
+const validateBody_post = (req, res, next) => {
   const { list, text } = req.body;
 
   if (!list || !text) return res.status(400).send({ message: 'INCOMPLETE DATA' });
@@ -9,7 +9,7 @@ export const validateBody_post = (req, res, next) => {
   next();
 };
 
-export const validateBody_patch = (req, res, next) => {
+const validateBody_patch = (req, res, next) => {
   const body = req.body;
 
   const checkForNonEmptyBody = 'text' in body || 'starred' in body;
@@ -19,3 +19,5 @@ export const validateBody_patch = (req, res, next) => {
 
   next();
 };
+
+module.exports = { validateBody_post, validateBody_patch };

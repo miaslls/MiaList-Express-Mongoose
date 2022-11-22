@@ -1,13 +1,15 @@
-import Entry from './Entry.js';
+const Entry = require('./Entry');
 
-export const create = (body) => Entry.create(body);
+const create = (body) => Entry.create(body);
 
-export const findAllByUser = (userId) => Entry.find({ user: userId }).populate('user').sort({ createdAt: 'desc' });
+const findAllByUser = (userId) => Entry.find({ user: userId }).populate('user').sort({ createdAt: 'desc' });
 
-export const findDuplicate = (list, text) => Entry.findOne({ list: list, text: text });
+const findDuplicate = (list, text) => Entry.findOne({ list: list, text: text });
 
-export const findById = (id) => Entry.findById(id);
+const findById = (id) => Entry.findById(id);
 
-export const update = (id, body) => Entry.findByIdAndUpdate(id, body).setOptions({ returnOriginal: false });
+const update = (id, body) => Entry.findByIdAndUpdate(id, body).setOptions({ returnOriginal: false });
 
-export const remove = (id) => Entry.findByIdAndRemove(id);
+const remove = (id) => Entry.findByIdAndRemove(id);
+
+module.exports = { create, findAllByUser, findDuplicate, findById, update, remove };

@@ -1,13 +1,15 @@
-import User from './User.js';
+const User = require('./User');
 
-export const create = (body) => User.create(body);
+const create = (body) => User.create(body);
 
-export const findAll = () => User.find().sort({ username: 'asc' });
+const findAll = () => User.find().sort({ username: 'asc' });
 
-export const findById = (id) => User.findById(id);
+const findById = (id) => User.findById(id);
 
-export const findByUsername = (username) => User.findOne({ username: username });
+const findByUsername = (username) => User.findOne({ username: username });
 
-export const update = (id, body) => User.findByIdAndUpdate(id, body).setOptions({ returnOriginal: false });
+const update = (id, body) => User.findByIdAndUpdate(id, body).setOptions({ returnOriginal: false });
 
-export const remove = (id) => User.findByIdAndDelete(id).select('-password');
+const remove = (id) => User.findByIdAndDelete(id).select('-password');
+
+module.exports = { create, findAll, findById, findByUsername, update, remove };

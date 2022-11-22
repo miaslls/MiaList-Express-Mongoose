@@ -1,4 +1,4 @@
-export const validateBody_post = (req, res, next) => {
+const validateBody_post = (req, res, next) => {
   const { username, password } = req.body;
 
   if (!username || !password) return res.status(400).send({ message: 'INCOMPLETE DATA' });
@@ -7,7 +7,7 @@ export const validateBody_post = (req, res, next) => {
   next();
 };
 
-export const validateBody_patch = (req, res, next) => {
+const validateBody_patch = (req, res, next) => {
   const { username, password, isAdmin } = req.body;
   if (!username && !password && !isAdmin) return res.status(400).send({ message: 'NO DATA' });
 
@@ -17,3 +17,5 @@ export const validateBody_patch = (req, res, next) => {
 
   next();
 };
+
+module.exports = { validateBody_post, validateBody_patch };

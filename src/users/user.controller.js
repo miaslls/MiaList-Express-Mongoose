@@ -1,10 +1,9 @@
-import bcrypt from 'bcryptjs';
-
-import * as service from './user.service.js';
+const bcrypt = require('bcryptjs');
+const service = require('./user.service');
 
 // 📌 POST
 
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
   try {
     const body = req.body;
 
@@ -23,7 +22,7 @@ export const createUser = async (req, res) => {
 
 // 📌 GET (ALL)
 
-export const findAllUsers = async (req, res) => {
+const findAllUsers = async (req, res) => {
   try {
     const loggedUser = req.user;
     if (!loggedUser.isAdmin) return res.status(403).send({ message: 'FORBIDDEN' });
@@ -37,7 +36,7 @@ export const findAllUsers = async (req, res) => {
 
 // 📌 PATCH
 
-export const updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
     const id = req.params.id;
     const body = req.body;
@@ -66,7 +65,7 @@ export const updateUser = async (req, res) => {
 
 // 📌 DELETE
 
-export const removeUser = async (req, res) => {
+const removeUser = async (req, res) => {
   try {
     const id = req.params.id;
     const loggedUser = req.user;
@@ -82,3 +81,5 @@ export const removeUser = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
+module.exports = { createUser, findAllUsers, updateUser, removeUser };

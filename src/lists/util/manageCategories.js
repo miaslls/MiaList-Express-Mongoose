@@ -1,6 +1,6 @@
-import * as categService from '../../tags/tag.service.js';
+const categService = require('../../tags/tag.service');
 
-export const addListToCateg = async (category, list) => {
+const addListToCateg = async (category, list) => {
   const categToUpdate = await categService.findById(category);
   if (!categToUpdate) return res.status(404).send({ message: 'CATEGORY NOT FOUND' });
 
@@ -12,7 +12,7 @@ export const addListToCateg = async (category, list) => {
   await categService.update(category, categBody);
 };
 
-export const removeListFromCateg = async (category, list) => {
+const removeListFromCateg = async (category, list) => {
   const categToUpdate = await categService.findById(category);
   if (!categToUpdate) return res.status(404).send({ message: 'CATEGORY NOT FOUND' });
 
@@ -26,3 +26,5 @@ export const removeListFromCateg = async (category, list) => {
   const categBody = { lists: categToUpdate_ListIds };
   await categService.update(category, categBody);
 };
+
+module.exports = { addListToCateg, removeListFromCateg };

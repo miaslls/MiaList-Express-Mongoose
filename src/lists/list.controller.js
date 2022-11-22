@@ -1,10 +1,9 @@
-import * as service from './list.service.js';
-
-import { addListToCateg, removeListFromCateg } from './util/manageCategories.js';
+const service = require('./list.service');
+const { addListToCateg, removeListFromCateg } = require('./util/manageCategories');
 
 // 📌 POST
 
-export const createList = async (req, res) => {
+const createList = async (req, res) => {
   try {
     const loggedUser = req.user;
     const reqBody = req.body;
@@ -25,7 +24,7 @@ export const createList = async (req, res) => {
 
 // 📌 GET (ALL) by user
 
-export const findAllListsByUser = async (req, res) => {
+const findAllListsByUser = async (req, res) => {
   try {
     const loggedUser = req.user;
     const lists = await service.findAllByUser(loggedUser._id);
@@ -38,7 +37,7 @@ export const findAllListsByUser = async (req, res) => {
 
 // 📌 PATCH
 
-export const updateList = async (req, res) => {
+const updateList = async (req, res) => {
   try {
     const loggedUser = req.user;
     const listId = req.params.id;
@@ -71,7 +70,7 @@ export const updateList = async (req, res) => {
 
 // 📌 DELETE
 
-export const removeList = async (req, res) => {
+const removeList = async (req, res) => {
   try {
     const loggedUser = req.user;
     const listId = req.params.id;
@@ -91,3 +90,5 @@ export const removeList = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
+module.exports = { createList, findAllListsByUser, updateList, removeList };

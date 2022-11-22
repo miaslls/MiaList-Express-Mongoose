@@ -1,4 +1,4 @@
-export const validateBody = (req, res, next) => {
+const validateBody = (req, res, next) => {
   const { name } = req.body;
 
   if (!name) {
@@ -7,3 +7,5 @@ export const validateBody = (req, res, next) => {
 
   next();
 };
+
+module.exports = { validateBody };

@@ -1,6 +1,6 @@
 'use strict';
 
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const databaseConnection = () => {
   mongoose
@@ -12,4 +12,4 @@ const databaseConnection = () => {
     .catch((err) => console.log(`error connecting to database: ${err}`));
 };
 
-export default databaseConnection;
+module.exports = databaseConnection;

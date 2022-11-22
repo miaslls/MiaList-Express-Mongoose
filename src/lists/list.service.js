@@ -1,14 +1,16 @@
-import List from './List.js';
+const List = require('./List');
 
-export const create = (body) => List.create(body);
+const create = (body) => List.create(body);
 
-export const findAllByUser = (userId) =>
+const findAllByUser = (userId) =>
   List.find({ user: userId }).populate('user').populate('category').populate('entries').sort({ title: 'asc' });
 
-export const findById = (id) => List.findById(id);
+const findById = (id) => List.findById(id);
 
-export const findByTitle = (title, user) => List.findOne({ title: title, user: user });
+const findByTitle = (title, user) => List.findOne({ title: title, user: user });
 
-export const update = (id, body) => List.findByIdAndUpdate(id, body).setOptions({ returnOriginal: false });
+const update = (id, body) => List.findByIdAndUpdate(id, body).setOptions({ returnOriginal: false });
 
-export const remove = (id) => List.findByIdAndRemove(id);
+const remove = (id) => List.findByIdAndRemove(id);
+
+module.exports = { create, findAllByUser, findById, findByTitle, update, remove };
