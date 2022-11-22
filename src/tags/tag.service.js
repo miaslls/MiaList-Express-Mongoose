@@ -2,7 +2,7 @@ const Tag = require('./Tag');
 
 const create = (body) => Tag.create(body);
 
-const findAllByUser = (userId) => Tag.find({ user: userId }).populate('user').sort({ name: 'asc' });
+const findAllByProfile = (profileId) => Tag.find({ profile: profileId }).populate('user').sort({ name: 'asc' });
 
 const findById = (id) => Tag.findById(id);
 
@@ -12,4 +12,4 @@ const update = (id, body) => Tag.findByIdAndUpdate(id, body).setOptions({ return
 
 const remove = (id) => Tag.findByIdAndRemove(id);
 
-module.exports = { create, findAllByUser, findById, findByName, update, remove };
+module.exports = { create, findAllByProfile, findById, findByName, update, remove };

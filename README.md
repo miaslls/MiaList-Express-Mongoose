@@ -28,6 +28,6 @@
 - 🔳 addTo/removeFromParent
 
   - ✅ profile
-  - 🔳 tag \*\* ❗❗❗
+  - ✅ tag
   - 🔳 list
   - 🔳 entry

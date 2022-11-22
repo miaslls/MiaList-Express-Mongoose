@@ -1,17 +1,22 @@
 const service = require('./tag.service');
 
+const { addTagToProfile, removeTagFromProfile } = require('./util/manageProfiles');
+
 // 📌 POST
 
 const createTag = async (req, res) => {
   try {
     const loggedUser = req.user;
+    const profileId = req.params.profileId;
     const reqBody = req.body;
 
-    const tagByName = await service.findByName(reqBody.name, loggedUser._id);
+    const tagByName = await service.findByName(reqBody.name, loggedUser._id, profileId);
     if (tagByName) return res.status(400).send({ message: 'DUPLICATE TAG' });
 
-    const body = { ...reqBody, user: loggedUser._id };
+    const body = { ...reqBody, user: loggedUser._id, profile: profileId };
     const tag = await service.create(body);
+
+    addTagToProfile(tag.profile, tag._id);
 
     res.send(tag);
   } catch (err) {
@@ -19,12 +24,12 @@ const createTag = async (req, res) => {
   }
 };
 
-// 📌 GET (ALL) by user
+// 📌 GET (ALL) by profile
 
-const findAllTagsByUser = async (req, res) => {
+const findAllTagsByProfile = async (req, res) => {
   try {
-    const loggedUser = req.user;
-    const tags = await service.findAllByUser(loggedUser._id);
+    const { profileId } = req.params;
+    const tags = await service.findAllByProfile(profileId);
 
     res.send(tags);
   } catch (err) {
@@ -78,10 +83,12 @@ const removeTag = async (req, res) => {
 
     const tag = await service.remove(tagId);
 
+    removeTagFromProfile(tagToRemove.profile.toString(), tagId);
+
     res.send(tag);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
 };
 
-module.exports = { createTag, findAllTagsByUser, updateTag, removeTag };
+module.exports = { createTag, findAllTagsByProfile, updateTag, removeTag };
