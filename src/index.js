@@ -6,6 +6,7 @@ import databaseConnection from './database/dbConnection.js';
 
 import authRoute from './auth/auth.route.js';
 import userRoute from './users/user.route.js';
+import profileRoute from './profiles/profile.route.js';
 import tagRoute from './tags/tag.route.js';
 import listRoute from './lists/list.route.js';
 import entryRoute from './entries/entry.route.js';
@@ -22,6 +23,7 @@ app.use(express.json());
 
 app.use('/login', authRoute);
 app.use('/user', userRoute);
+app.use('/profile', authorize, profileRoute);
 app.use('/tag', authorize, tagRoute);
 app.use('/list', authorize, listRoute);
 app.use('/entry', authorize, entryRoute);
