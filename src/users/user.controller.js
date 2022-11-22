@@ -46,6 +46,7 @@ const updateUser = async (req, res) => {
 
     const userById = await service.findById(id);
     if (!userById) return res.status(404).send({ message: 'NOT FOUND' });
+    if (userById._id.toString() !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
 
     if ('username' in body) {
       const userByUsername = await service.findByUsername(body.username);
