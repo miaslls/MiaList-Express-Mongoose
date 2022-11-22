@@ -39,9 +39,12 @@ const findAllProfilesByUser = async (req, res) => {
 
 const findProfileById = async (req, res) => {
   try {
+    const loggedUser = req.user;
     const profileId = req.params.id;
 
     const profile = await service.findById(profileId);
+
+    if (profile.user._id.toString() !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
 
     res.send(profile);
   } catch (err) {
