@@ -35,14 +35,13 @@ const findAllProfilesByUser = async (req, res) => {
   }
 };
 
-// 📌 GET by name
+// 📌 GET by ID
 
-const findProfileByName = async (req, res) => {
+const findProfileById = async (req, res) => {
   try {
-    const loggedUser = req.user;
+    const profileId = req.params.profileId;
 
-    const profileName = req.params.profileName;
-    const profile = await service.findByName(profileName, loggedUser._id);
+    const profile = await service.findById(profileId);
 
     res.send(profile);
   } catch (err) {

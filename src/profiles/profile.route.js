@@ -9,7 +9,7 @@ const entryRoute = require('../entries/entry.route');
 
 profile.post('/', controller.createProfile);
 profile.get('/', controller.findAllProfilesByUser);
-profile.get('/:profileName', controller.findProfileByName);
+profile.get('/:profileId', controller.findProfileById);
 
 profile.use('/:profileName/tag', tagRoute);
 profile.use('/:profileName/list', listRoute);
