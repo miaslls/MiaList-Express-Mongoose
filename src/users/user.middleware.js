@@ -10,10 +10,7 @@ const validateBody_post = (req, res, next) => {
 const validateBody_patch = (req, res, next) => {
   const { username, password, isAdmin } = req.body;
   if (!username && !password && !isAdmin) return res.status(400).send({ message: 'NO DATA' });
-
-  if (password) {
-    if (body.password.length < 8) return res.status(400).send({ message: 'PASSWORD INVALID' });
-  }
+  if (password) if (body.password.length < 8) return res.status(400).send({ message: 'PASSWORD INVALID' });
 
   next();
 };
