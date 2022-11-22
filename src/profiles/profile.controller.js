@@ -77,4 +77,27 @@ const updateProfile = async (req, res) => {
   }
 };
 
-module.exports = { createProfile, findAllProfilesByUser, findProfileById, updateProfile };
+// 📌 DELETE
+
+const removeProfile = async (req, res) => {
+  try {
+    const loggedUser = req.user;
+    const profileId = req.params.profileId;
+
+    const profileToRemove = await service.findById(profileId);
+    if (!profileToRemove) return res.status(404).send({ message: 'PROFILE NOT FOUND' });
+
+    const profileUserId = profileToRemove.user.toString();
+    if (profileUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
+
+    const profile = await service.remove(profileId);
+
+    removeProfileFromUser(profileToRemove.user.toString(), profileId);
+
+    res.send(profile);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+module.exports = { createProfile, findAllProfilesByUser, findProfileById, updateProfile, removeProfile };

@@ -11,6 +11,7 @@ profile.post('/', controller.createProfile);
 profile.get('/', controller.findAllProfilesByUser);
 profile.get('/:profileId', validate_id, controller.findProfileById);
 profile.patch('/:profileId', validate_id, controller.updateProfile);
+profile.delete('/:profileId', validate_id, controller.removeProfile);
 
 profile.use('/:profileName/tag', tagRoute);
 profile.use('/:profileName/list', listRoute);
