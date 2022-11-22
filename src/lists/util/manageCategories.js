@@ -1,4 +1,4 @@
-import * as categService from '../../categories/category.service.js';
+import * as categService from '../../tags/tag.service.js';
 
 export const addListToCateg = async (category, list) => {
   const categToUpdate = await categService.findById(category);
