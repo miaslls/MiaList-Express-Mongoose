@@ -40,7 +40,7 @@ const findAllEntriesByUser = async (req, res) => {
 const updateEntry = async (req, res) => {
   try {
     const loggedUser = req.user;
-    const entryId = req.params.id;
+    const entryId = req.params.entryId;
     const body = req.body;
 
     const entryToUpdate = await service.findById(entryId);
@@ -68,7 +68,7 @@ const updateEntry = async (req, res) => {
 const removeEntry = async (req, res) => {
   try {
     const loggedUser = req.user;
-    const entryId = req.params.id;
+    const entryId = req.params.entryId;
 
     const entryToRemove = await service.findById(entryId);
     if (!entryToRemove) return res.status(404).send({ message: 'ENTRY NOT FOUND' });

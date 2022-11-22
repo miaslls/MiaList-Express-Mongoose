@@ -37,7 +37,7 @@ const findAllTagsByUser = async (req, res) => {
 const updateTag = async (req, res) => {
   try {
     const loggedUser = req.user;
-    const tagId = req.params.id;
+    const tagId = req.params.tagId;
     const body = req.body;
 
     const tagToUpdate = await service.findById(tagId);
@@ -65,7 +65,7 @@ const updateTag = async (req, res) => {
 const removeTag = async (req, res) => {
   try {
     const loggedUser = req.user;
-    const tagId = req.params.id;
+    const tagId = req.params.tagId;
 
     const tagToRemove = await service.findById(tagId);
     if (!tagToRemove) return res.status(404).send({ message: 'TAG NOT FOUND' });

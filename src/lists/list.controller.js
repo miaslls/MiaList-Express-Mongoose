@@ -40,7 +40,7 @@ const findAllListsByUser = async (req, res) => {
 const updateList = async (req, res) => {
   try {
     const loggedUser = req.user;
-    const listId = req.params.id;
+    const listId = req.params.listId;
     const body = req.body;
 
     const listToUpdate = await service.findById(listId);
@@ -73,7 +73,7 @@ const updateList = async (req, res) => {
 const removeList = async (req, res) => {
   try {
     const loggedUser = req.user;
-    const listId = req.params.id;
+    const listId = req.params.listId;
 
     const listToRemove = await service.findById(listId);
     if (!listToRemove) return res.status(404).send({ message: 'LIST NOT FOUND' });
