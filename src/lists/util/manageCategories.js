@@ -16,14 +16,14 @@ const removeListFromCateg = async (category, list) => {
   const categToUpdate = await categService.findById(category);
   if (!categToUpdate) return res.status(404).send({ message: 'CATEGORY NOT FOUND' });
 
-  const categToUpdate_ListIds = [];
+  const categToUpdate_listIds = [];
 
-  categToUpdate.lists.forEach((list) => categToUpdate_ListIds.push(list.toString()));
+  categToUpdate.lists.forEach((list) => categToUpdate_listIds.push(list.toString()));
 
-  const removedListIndex = categToUpdate_ListIds.indexOf(list);
-  categToUpdate_ListIds.splice(removedListIndex, 1);
+  const removedListIndex = categToUpdate_listIds.indexOf(list);
+  categToUpdate_listIds.splice(removedListIndex, 1);
 
-  const categBody = { lists: categToUpdate_ListIds };
+  const categBody = { lists: categToUpdate_listIds };
   await categService.update(category, categBody);
 };
 
