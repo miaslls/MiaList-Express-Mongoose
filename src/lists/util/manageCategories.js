@@ -2,7 +2,6 @@ const categService = require('../../tags/tag.service');
 
 const addListToCateg = async (category, list) => {
   const categToUpdate = await categService.findById(category);
-  if (!categToUpdate) return res.status(404).send({ message: 'CATEGORY NOT FOUND' });
 
   if (!categToUpdate.lists.includes(list)) {
     categToUpdate.lists.push(list);
@@ -14,10 +13,8 @@ const addListToCateg = async (category, list) => {
 
 const removeListFromCateg = async (category, list) => {
   const categToUpdate = await categService.findById(category);
-  if (!categToUpdate) return res.status(404).send({ message: 'CATEGORY NOT FOUND' });
 
   const categToUpdate_listIds = [];
-
   categToUpdate.lists.forEach((list) => categToUpdate_listIds.push(list.toString()));
 
   const removedListIndex = categToUpdate_listIds.indexOf(list);
