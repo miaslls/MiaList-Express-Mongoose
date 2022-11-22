@@ -2,21 +2,33 @@
 
 ## **TODO**:
 
+- 🔳 validate GET (403)
+
+  - ✅ user
+  - ✅ profile
+  - 🔳 tag
+  - 🔳 list
+  - 🔳 entry
+
 - 🔳 validate CREATE (\* remove unauthorized from POST, leave at PATCH)
-  - 🔳 user
-  - 🔳 profile \*
+
+  - ✅ user
+  - ✅ profile \*
   - 🔳 tag \*
   - 🔳 list \*
   - 🔳 entry \*
-- 🔳 validate UPDATE (\* validate_id)
-  - 🔳 user
-  - 🔳 profile
+
+- 🔳 validate UPDATE (\* validate_id inside entity.middleware)
+
+  - ✅ user
+  - ✅ profile
   - 🔳 tag \*
   - 🔳 list \*
   - 🔳 entry \*
+
 - 🔳 addTo/removeFromParent
-  - 🔳 user
-  - 🔳 profile
+
+  - ✅ profile
   - 🔳 tag
   - 🔳 list
   - 🔳 entry
