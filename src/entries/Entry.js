@@ -8,6 +8,7 @@ const EntrySchema = new mongoose.Schema(
     completed: { type: Boolean },
     createdAt: { type: Date, required: true, default: new Date() },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    profile: { type: mongoose.Schema.Types.ObjectId, ref: 'Profile', required: true },
   },
   { versionKey: false },
 );
