@@ -14,8 +14,8 @@ profile.get('/:id', validate_id, controller.findProfileById);
 profile.patch('/:id', validate_id, validateBody_patch, controller.updateProfile);
 profile.delete('/:id', validate_id, controller.removeProfile);
 
-profile.use('/:profileName/tag', tagRoute);
-profile.use('/:profileName/list', listRoute);
-profile.use('/:profileName/entry', entryRoute);
+profile.use('/:profileId/tag', tagRoute);
+profile.use('/:profileId/list', listRoute);
+profile.use('/:profileId/entry', entryRoute);
 
 module.exports = profile;
