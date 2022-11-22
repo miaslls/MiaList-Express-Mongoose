@@ -1,12 +1,11 @@
-const entry = require('express').Router();
+const entry = require('express').Router({ mergeParams: true });
 const controller = require('./entry.controller');
 
-import validate_id from '../middleware/validate_id.js';
-import { validateBody_post, validateBody_patch } from './entry.middleware.js';
+const { validateBody_post, validateBody_patch } = require('./entry.middleware');
 
 entry.post('/', validateBody_post, controller.createEntry);
 entry.get('/', controller.findAllEntriesByUser);
-entry.patch('/:id', validate_id, validateBody_patch, controller.updateEntry);
-entry.delete('/:id', validate_id, controller.removeEntry);
+entry.patch('/:entryId', validateBody_patch, controller.updateEntry);
+entry.delete('/:entryId', controller.removeEntry);
 
 module.exports = entry;
