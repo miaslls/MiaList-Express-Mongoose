@@ -35,4 +35,19 @@ const findAllProfilesByUser = async (req, res) => {
   }
 };
 
-module.exports = { createProfile, findAllProfilesByUser };
+// 📌 GET by name
+
+const findProfileByName = async (req, res) => {
+  try {
+    const loggedUser = req.user;
+
+    const profileName = req.params.profileName;
+    const profile = await service.findByName(profileName, loggedUser._id);
+
+    res.send(profile);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+module.exports = { createProfile, findAllProfilesByUser, findProfileByName };
