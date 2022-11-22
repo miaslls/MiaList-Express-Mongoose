@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const CategorySchema = new mongoose.Schema(
+const TagSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     lists: [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }],
@@ -11,6 +11,6 @@ const CategorySchema = new mongoose.Schema(
   { versionKey: false },
 );
 
-const Category = mongoose.model('Category', CategorySchema, 'categories');
+const Tag = mongoose.model('Tag', TagSchema, 'tags');
 
-module.exports = Category;
+module.exports = Tag;
