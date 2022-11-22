@@ -49,4 +49,32 @@ const findProfileById = async (req, res) => {
   }
 };
 
-module.exports = { createProfile, findAllProfilesByUser, findProfileByName };
+// 📌 PATCH
+
+const updateProfile = async (req, res) => {
+  try {
+    const loggedUser = req.user;
+    const profileId = req.params.profileId;
+    const body = req.body;
+
+    const profileToUpdate = await service.findById(profileId);
+    if (!profileToUpdate) return res.status(404).send({ message: 'PROFILE NOT FOUND' });
+
+    const profileUserId = profileToUpdate.user.toString();
+    if (profileUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
+
+    const profileByName = await service.findByName(profileToUpdate.name, loggedUser._id);
+
+    if (profileByName) {
+      if (profileToUpdate.name !== body.name) return res.status(400).send({ message: 'DUPLICATE PROFILE' });
+    }
+
+    const profile = await service.update(profileId, body);
+
+    res.send(profile);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+module.exports = { createProfile, findAllProfilesByUser, findProfileById, updateProfile };
