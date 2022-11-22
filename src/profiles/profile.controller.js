@@ -39,7 +39,7 @@ const findAllProfilesByUser = async (req, res) => {
 
 const findProfileById = async (req, res) => {
   try {
-    const profileId = req.params.profileId;
+    const profileId = req.params.id;
 
     const profile = await service.findById(profileId);
 
@@ -54,7 +54,7 @@ const findProfileById = async (req, res) => {
 const updateProfile = async (req, res) => {
   try {
     const loggedUser = req.user;
-    const profileId = req.params.profileId;
+    const profileId = req.params.id;
     const body = req.body;
 
     const profileToUpdate = await service.findById(profileId);
@@ -82,7 +82,7 @@ const updateProfile = async (req, res) => {
 const removeProfile = async (req, res) => {
   try {
     const loggedUser = req.user;
-    const profileId = req.params.profileId;
+    const profileId = req.params.id;
 
     const profileToRemove = await service.findById(profileId);
     if (!profileToRemove) return res.status(404).send({ message: 'PROFILE NOT FOUND' });

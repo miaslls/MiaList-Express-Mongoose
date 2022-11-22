@@ -9,9 +9,9 @@ const entryRoute = require('../entries/entry.route');
 
 profile.post('/', controller.createProfile);
 profile.get('/', controller.findAllProfilesByUser);
-profile.get('/:profileId', validate_id, controller.findProfileById);
-profile.patch('/:profileId', validate_id, controller.updateProfile);
-profile.delete('/:profileId', validate_id, controller.removeProfile);
+profile.get('/:id', validate_id, controller.findProfileById);
+profile.patch('/:id', validate_id, controller.updateProfile);
+profile.delete('/:id', validate_id, controller.removeProfile);
 
 profile.use('/:profileName/tag', tagRoute);
 profile.use('/:profileName/list', listRoute);
