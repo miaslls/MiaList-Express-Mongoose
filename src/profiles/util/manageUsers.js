@@ -27,4 +27,4 @@ const removeProfileFromUser = async (user, profile) => {
   await userService.update(user, userBody);
 };
 
-module.exports = { addProfileToUser };
+module.exports = { addProfileToUser, removeProfileFromUser };

@@ -1,5 +1,5 @@
 const service = require('./profile.service');
-const { addProfileToUser } = require('./util/manageUsers');
+const { addProfileToUser, removeProfileFromUser } = require('./util/manageUsers');
 
 // 📌 POST
 
@@ -60,10 +60,10 @@ const updateProfile = async (req, res) => {
     const profileToUpdate = await service.findById(profileId);
     if (!profileToUpdate) return res.status(404).send({ message: 'PROFILE NOT FOUND' });
 
-    const profileUserId = profileToUpdate.user.toString();
+    const profileUserId = profileToUpdate.user._id.toString();
     if (profileUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
 
-    const profileByName = await service.findByName(profileToUpdate.name, loggedUser._id);
+    const profileByName = await service.findByName(body.name, loggedUser._id);
 
     if (profileByName) {
       if (profileToUpdate.name !== body.name) return res.status(400).send({ message: 'DUPLICATE PROFILE' });
@@ -87,12 +87,12 @@ const removeProfile = async (req, res) => {
     const profileToRemove = await service.findById(profileId);
     if (!profileToRemove) return res.status(404).send({ message: 'PROFILE NOT FOUND' });
 
-    const profileUserId = profileToRemove.user.toString();
+    const profileUserId = profileToRemove.user._id.toString();
     if (profileUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
 
     const profile = await service.remove(profileId);
 
-    removeProfileFromUser(profileToRemove.user.toString(), profileId);
+    removeProfileFromUser(profileToRemove.user._id.toString(), profileId);
 
     res.send(profile);
   } catch (err) {
