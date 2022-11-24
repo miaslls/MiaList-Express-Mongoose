@@ -22,12 +22,12 @@ const createList = async (req, res) => {
   }
 };
 
-// 📌 GET (ALL) by user
+// 📌 GET (ALL) by profile
 
-const findAllListsByUser = async (req, res) => {
+const findAllListsByProfile = async (req, res) => {
   try {
-    const loggedUser = req.user;
-    const lists = await service.findAllByUser(loggedUser._id);
+    const profileId = req.params.profileId;
+    const lists = await service.findAllByProfile(profileId);
 
     res.send(lists);
   } catch (err) {
@@ -91,4 +91,4 @@ const removeList = async (req, res) => {
   }
 };
 
-module.exports = { createList, findAllListsByUser, updateList, removeList };
+module.exports = { createList, findAllListsByProfile, updateList, removeList };
