@@ -71,6 +71,7 @@ const updateTag = async (req, res) => {
 const removeTag = async (req, res) => {
   try {
     const loggedUser = req.user;
+    const profileId = req.params.profileId;
     const tagId = req.params.tagId;
 
     const tagToRemove = await service.findById(tagId);
@@ -81,9 +82,8 @@ const removeTag = async (req, res) => {
 
     if (tagToRemove.lists.length > 0) return res.status(405).send({ message: 'TAG NON-EMPTY' });
 
+    await removeTagFromProfile(profileId, tagId);
     const tag = await service.remove(tagId);
-
-    removeTagFromProfile(tagToRemove.profile.toString(), tagId);
 
     res.send(tag);
   } catch (err) {

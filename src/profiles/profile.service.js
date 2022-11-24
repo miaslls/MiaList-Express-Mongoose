@@ -4,7 +4,7 @@ const create = (body) => Profile.create(body);
 
 const findAllByUser = (userId) => Profile.find({ user: userId }).populate('user').sort({ name: 'asc' });
 
-const findById = (id) => Profile.findById(id).populate('user').populate('tags').populate('lists');
+const findById = (id) => Profile.findById(id).populate('user');
 
 const findByName = (name, userId) => Profile.findOne({ name: name, user: userId });
 
