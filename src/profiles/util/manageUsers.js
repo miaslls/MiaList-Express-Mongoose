@@ -3,9 +3,7 @@ const userService = require('../../users/user.service');
 const addProfileToUser = async (user, profile) => {
   const userToUpdate = await userService.findById(user);
 
-  if (!userToUpdate.profiles.includes(profile)) {
-    userToUpdate.profiles.push(profile);
-  }
+  if (!userToUpdate.profiles.includes(profile)) userToUpdate.profiles.push(profile);
 
   const userBody = { profiles: userToUpdate.profiles };
   await userService.update(user, userBody);
