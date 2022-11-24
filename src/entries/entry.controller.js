@@ -6,13 +6,14 @@ const { addEntryToList, removeEntryFromList } = require('./util/manageLists');
 const createEntry = async (req, res) => {
   try {
     const loggedUser = req.user;
+    const { profileId } = req.params;
     const reqBody = req.body;
 
     const duplicateEntry = await service.findDuplicate(reqBody.list, reqBody.text);
     if (duplicateEntry) return res.status(400).send({ message: 'DUPLICATE ENTRY' });
 
     const now = new Date();
-    const body = { ...reqBody, user: loggedUser._id, createdAt: now };
+    const body = { ...reqBody, user: loggedUser._id, profile: profileId, createdAt: now };
     const entry = await service.create(body);
 
     addEntryToList(entry.list, entry._id);
@@ -64,9 +65,9 @@ const removeEntry = async (req, res) => {
     const entryUserId = entryToRemove.user.toString();
     if (entryUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
 
-    const entry = await service.remove(entryId);
-
     removeEntryFromList(entryToRemove.list.toString(), entryId);
+
+    const entry = await service.remove(entryId);
 
     res.send(entry);
   } catch (err) {
