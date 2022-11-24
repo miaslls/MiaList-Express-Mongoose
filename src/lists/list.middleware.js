@@ -19,7 +19,7 @@ const validateBody_patch = (req, res, next) => {
   if (!checkForNonEmptyBody) return res.status(400).send({ message: 'NO DATA' });
 
   if ('tags' in body) {
-    tags.forEach((tag) => {
+    body.tags.forEach((tag) => {
       if (!mongoose.Types.ObjectId.isValid(tag)) return res.status(400).send({ message: 'TAG INVALID' });
     });
   }
