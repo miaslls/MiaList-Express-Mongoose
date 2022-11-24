@@ -2,34 +2,37 @@
 
 ## **TODO**:
 
-- 🔳 validate GET (403)
+- ✅ validate GET (403)
 
   - ✅ user
   - ✅ profile
   - ✅ list
-  - 🔳 entry
+  - ✅ entry
 
-- 🔳 validate CREATE (\* remove unauthorized from POST, leave at PATCH)
+- ✅ validate CREATE (\* remove unauthorized from POST, leave at PATCH)
 
   - ✅ user
   - ✅ profile \*
   - ✅ tag \*
   - ✅ list \*
-  - 🔳 entry \*
+  - ✅ entry \*
 
-- 🔳 validate UPDATE (\* validate_id inside entity.middleware)
+- ✅ validate UPDATE (\* validate_id inside entity.middleware)
 
   - ✅ user
   - ✅ profile
   - ✅ tag \*
   - ✅ list \*
-  - 🔳 entry \*
+  - ✅ entry \*
 
-- 🔳 addTo/removeFromParent
+- ✅ addTo/removeFromParent
 
   - ✅ profile
   - ✅ tag
   - ✅ list
-  - 🔳 entry
+  - ✅ entry
 
   - ✅ FIXME: createdAt - controller (add to body)
+
+  - 🔳 awaits (addTo/removeFrom)
+  - 🔳 better routing?
