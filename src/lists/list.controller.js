@@ -1,21 +1,22 @@
 const service = require('./list.service');
-const { addListToCateg, removeListFromCateg } = require('./util/manageCategories');
+const { addListToTag, removeListFromTag } = require('./util/manageTags');
 
 // 📌 POST
 
 const createList = async (req, res) => {
   try {
     const loggedUser = req.user;
+    const profileId = req.params.profileId;
     const reqBody = req.body;
 
-    const listByTitle = await service.findByTitle(reqBody.title, loggedUser._id);
+    const listByTitle = await service.findByTitle(reqBody.title, profileId);
     if (listByTitle) return res.status(400).send({ message: 'DUPLICATE LIST' });
 
     const now = new Date();
-    const body = { ...reqBody, user: loggedUser._id, createdAt: now };
+    const body = { ...reqBody, user: loggedUser._id, profile: profileId, createdAt: now };
     const list = await service.create(body);
 
-    // addListToCateg(list.category, list._id);
+    list.tags.forEach((tag) => addListToTag(tag, list._id));
 
     res.send(list);
   } catch (err) {
@@ -58,10 +59,19 @@ const updateList = async (req, res) => {
 
     const list = await service.update(listId, body);
 
-    // if ('category' in body) {
-    //   addListToCateg(body.category, listId);
-    //   removeListFromCateg(listToUpdate.category.toString(), listId);
-    // }
+    if ('tags' in body) {
+      const listToUpdateTagStrings = [];
+
+      listToUpdate.tags.forEach((tag) => listToUpdateTagStrings.push(tag._id.toString()));
+
+      if (listToUpdateTagStrings !== body.tags) {
+        const tagsAdded = body.tags.filter((tag) => !listToUpdateTagStrings.includes(tag));
+        const tagsRemoved = listToUpdateTagStrings.filter((tag) => !body.tags.includes(tag));
+
+        tagsAdded.forEach((tag) => addListToTag(tag, listId));
+        tagsRemoved.forEach((tag) => removeListFromTag(tag, listId));
+      }
+    }
 
     res.send(list);
   } catch (err) {
@@ -84,7 +94,13 @@ const removeList = async (req, res) => {
 
     const list = await service.remove(listId);
 
-    // removeListFromCateg(listToRemove.category.toString(), listId);
+    const listToRemoveTagStrings = [];
+
+    listToRemove.tags.forEach((tag) => {
+      listToRemoveTagStrings.push(tag._id.toString());
+    });
+
+    listToRemoveTagStrings.forEach((tag) => removeListFromTag(tag, listId));
 
     res.send(list);
   } catch (err) {

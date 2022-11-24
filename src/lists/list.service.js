@@ -3,11 +3,11 @@ const List = require('./List');
 const create = (body) => List.create(body);
 
 const findAllByProfile = (profileId) =>
-  List.find({ user: profileId }).populate('user').populate('tags').populate('entries').sort({ title: 'asc' });
+  List.find({ profile: profileId }).populate('user').populate('tags').populate('entries').sort({ title: 'asc' });
 
 const findById = (id) => List.findById(id);
 
-const findByTitle = (title, user) => List.findOne({ title: title, user: user });
+const findByTitle = (title, profileId) => List.findOne({ title: title, profile: profileId });
 
 const update = (id, body) => List.findByIdAndUpdate(id, body).setOptions({ returnOriginal: false });
 

@@ -29,7 +29,7 @@
 
   - ✅ profile
   - ✅ tag
-  - 🔳 list
+  - ✅ list
   - 🔳 entry
 
   - ✅ FIXME: createdAt - controller (add to body)
