@@ -12,7 +12,7 @@ const validateBody_post = (req, res, next) => {
 const validateBody_patch = (req, res, next) => {
   const body = req.body;
 
-  const checkForNonEmptyBody = 'text' in body || 'starred' in body;
+  const checkForNonEmptyBody = 'text' in body || 'starred' in body || 'completed' in body;
   if (!checkForNonEmptyBody) return res.status(400).send({ message: 'NO DATA' });
 
   next();
