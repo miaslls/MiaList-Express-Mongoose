@@ -11,7 +11,8 @@ const createEntry = async (req, res) => {
     const duplicateEntry = await service.findDuplicate(reqBody.list, reqBody.text);
     if (duplicateEntry) return res.status(400).send({ message: 'DUPLICATE ENTRY' });
 
-    const body = { ...reqBody, user: loggedUser._id };
+    const now = new Date();
+    const body = { ...reqBody, user: loggedUser._id, createdAt: now };
     const entry = await service.create(body);
 
     addEntryToList(entry.list, entry._id);

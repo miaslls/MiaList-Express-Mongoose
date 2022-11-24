@@ -7,7 +7,7 @@ const ListSchema = new mongoose.Schema(
     pinned: { type: Boolean },
     tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
     entries: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Entry' }],
-    createdAt: { type: Date, required: true, default: new Date() },
+    createdAt: { type: Date, required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     profile: { type: mongoose.Schema.Types.ObjectId, ref: 'Profile', required: true },
   },

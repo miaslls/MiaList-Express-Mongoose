@@ -11,10 +11,11 @@ const createList = async (req, res) => {
     const listByTitle = await service.findByTitle(reqBody.title, loggedUser._id);
     if (listByTitle) return res.status(400).send({ message: 'DUPLICATE LIST' });
 
-    const body = { ...reqBody, user: loggedUser._id };
+    const now = new Date();
+    const body = { ...reqBody, user: loggedUser._id, createdAt: now };
     const list = await service.create(body);
 
-    addListToCateg(list.category, list._id);
+    // addListToCateg(list.category, list._id);
 
     res.send(list);
   } catch (err) {
@@ -57,10 +58,10 @@ const updateList = async (req, res) => {
 
     const list = await service.update(listId, body);
 
-    if ('category' in body) {
-      addListToCateg(body.category, listId);
-      removeListFromCateg(listToUpdate.category.toString(), listId);
-    }
+    // if ('category' in body) {
+    //   addListToCateg(body.category, listId);
+    //   removeListFromCateg(listToUpdate.category.toString(), listId);
+    // }
 
     res.send(list);
   } catch (err) {
@@ -83,7 +84,7 @@ const removeList = async (req, res) => {
 
     const list = await service.remove(listId);
 
-    removeListFromCateg(listToRemove.category.toString(), listId);
+    // removeListFromCateg(listToRemove.category.toString(), listId);
 
     res.send(list);
   } catch (err) {
