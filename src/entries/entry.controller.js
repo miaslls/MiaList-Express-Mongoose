@@ -23,19 +23,6 @@ const createEntry = async (req, res) => {
   }
 };
 
-// 📌 GET (ALL) by user
-
-const findAllEntriesByUser = async (req, res) => {
-  try {
-    const loggedUser = req.user;
-    const entries = await service.findAllByUser(loggedUser._id);
-
-    res.send(entries);
-  } catch (err) {
-    res.status(500).send({ message: err.message });
-  }
-};
-
 // 📌 PATCH
 
 const updateEntry = async (req, res) => {
@@ -87,4 +74,4 @@ const removeEntry = async (req, res) => {
   }
 };
 
-module.exports = { createEntry, findAllEntriesByUser, updateEntry, removeEntry };
+module.exports = { createEntry, updateEntry, removeEntry };

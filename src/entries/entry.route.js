@@ -4,7 +4,6 @@ const controller = require('./entry.controller');
 const { validateBody_post, validateBody_patch } = require('./entry.middleware');
 
 entry.post('/', validateBody_post, controller.createEntry);
-entry.get('/', controller.findAllEntriesByUser);
 entry.patch('/:entryId', validateBody_patch, controller.updateEntry);
 entry.delete('/:entryId', controller.removeEntry);
 

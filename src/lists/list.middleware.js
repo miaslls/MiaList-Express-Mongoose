@@ -14,6 +14,9 @@ const validateBody_post = (req, res, next) => {
 
 const validateBody_patch = (req, res, next) => {
   const body = req.body;
+  const { listId } = req.params.listId;
+
+  if (!mongoose.Types.ObjectId.isValid(listId)) return res.status(400).send({ message: 'ID INVALID' });
 
   const checkForNonEmptyBody = 'title' in body || 'icon' in body || 'tags' in body || 'pinned' in body;
   if (!checkForNonEmptyBody) return res.status(400).send({ message: 'NO DATA' });
