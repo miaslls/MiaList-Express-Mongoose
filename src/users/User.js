@@ -7,9 +7,6 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true, select: false },
     isAdmin: { type: Boolean, required: true, default: false },
     profiles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Profile' }],
-    name: { type: String },
-    email: { type: String, unique: true },
-    CPF: { type: Number, unique: true },
   },
   { versionKey: false },
 );
