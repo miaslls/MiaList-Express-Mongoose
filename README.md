@@ -6,7 +6,7 @@
 
   - ✅ user
   - ✅ profile
-  - 🔳 list
+  - ✅ list
   - 🔳 entry
 
 - 🔳 validate CREATE (\* remove unauthorized from POST, leave at PATCH)
@@ -14,7 +14,7 @@
   - ✅ user
   - ✅ profile \*
   - ✅ tag \*
-  - 🔳 list \*
+  - ✅ list \*
   - 🔳 entry \*
 
 - 🔳 validate UPDATE (\* validate_id inside entity.middleware)
@@ -22,7 +22,7 @@
   - ✅ user
   - ✅ profile
   - ✅ tag \*
-  - 🔳 list \*
+  - ✅ list \*
   - 🔳 entry \*
 
 - 🔳 addTo/removeFromParent
@@ -31,3 +31,5 @@
   - ✅ tag
   - 🔳 list
   - 🔳 entry
+
+  - ✅ FIXME: createdAt - controller (add to body)
