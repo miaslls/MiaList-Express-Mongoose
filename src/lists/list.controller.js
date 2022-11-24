@@ -92,15 +92,11 @@ const removeList = async (req, res) => {
     const listUserId = listToRemove.user.toString();
     if (listUserId !== loggedUser._id) return res.status(403).send({ message: 'FORBIDDEN' });
 
-    const list = await service.remove(listId);
-
     const listToRemoveTagStrings = [];
+    listToRemove.tags.forEach((tag) => listToRemoveTagStrings.push(tag._id.toString()));
+    listToRemoveTagStrings.forEach(async (tag) => await removeListFromTag(tag, listId));
 
-    listToRemove.tags.forEach((tag) => {
-      listToRemoveTagStrings.push(tag._id.toString());
-    });
-
-    listToRemoveTagStrings.forEach((tag) => removeListFromTag(tag, listId));
+    const list = await service.remove(listId);
 
     res.send(list);
   } catch (err) {
